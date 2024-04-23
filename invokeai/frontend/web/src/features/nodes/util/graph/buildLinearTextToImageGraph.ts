@@ -9,11 +9,9 @@ import { addControlNetToLinearGraph } from './addControlNetToLinearGraph';
 import { addHrfToGraph } from './addHrfToGraph';
 import { addIPAdapterToLinearGraph } from './addIPAdapterToLinearGraph';
 import { addLoRAsToGraph } from './addLoRAsToGraph';
-import { addNSFWCheckerToGraph } from './addNSFWCheckerToGraph';
 import { addSeamlessToLinearGraph } from './addSeamlessToLinearGraph';
 import { addT2IAdaptersToLinearGraph } from './addT2IAdapterToLinearGraph';
 import { addVAEToGraph } from './addVAEToGraph';
-import { addWatermarkerToGraph } from './addWatermarkerToGraph';
 import {
   CLIP_SKIP,
   DENOISE_LATENTS,
@@ -261,17 +259,6 @@ export const buildLinearTextToImageGraph = async (state: RootState): Promise<Non
   // High resolution fix.
   if (state.hrf.hrfEnabled) {
     addHrfToGraph(state, graph);
-  }
-
-  // NSFW & watermark - must be last thing added to graph
-  if (state.system.shouldUseNSFWChecker) {
-    // must add before watermarker!
-    addNSFWCheckerToGraph(state, graph);
-  }
-
-  if (state.system.shouldUseWatermarker) {
-    // must add after nsfw checker!
-    addWatermarkerToGraph(state, graph);
   }
 
   return graph;
