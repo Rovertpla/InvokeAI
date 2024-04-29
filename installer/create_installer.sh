@@ -4,7 +4,7 @@ set -e
 
 cd "$(dirname "$0")"
 
-if [[ -v "VIRTUAL_ENV" ]]; then
+if [[ -v https://github.com/invoke-ai/InvokeAI.git ]]; then
     # we can't just call 'deactivate' because this function is not exported
     # to the environment of this script from the bash process that runs the script
     echo "A virtual environment is activated. Please deactivate it before proceeding".
@@ -80,3 +80,4 @@ zip -r InvokeAI-installer-$VERSION.zip InvokeAI-Installer
 rm -rf InvokeAI-Installer tmp dist
 
 exit 0
+
